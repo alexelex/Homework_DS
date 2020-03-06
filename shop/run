@@ -1,3 +1,0 @@
-#!/bin/bash
-(lsof -nti:8000 | xargs kill -9) && venv/bin/python manage.py runserver
-
