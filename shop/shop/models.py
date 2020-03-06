@@ -8,12 +8,8 @@ class Products(models.Model):
     code = models.CharField(max_length=200)
     category = models.CharField(max_length=200)
 
-    author = models.CharField(max_lenght=200, blank=True)
-    modifier = models.CharField(max_lenght=200, blank=True)
+    author = models.CharField(max_length=200, blank=True)
+    modifier = models.CharField(max_length=200, blank=True)
 
     time_create = models.DateTimeField(auto_now_add=True)
     time_modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        app_label = u'mongo'
-        db_table = u'store_products'

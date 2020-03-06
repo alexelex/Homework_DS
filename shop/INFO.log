@@ -1,0 +1,245 @@
+Watching for file changes with StatReloader
+Internal Server Error: /database/product/edit
+Traceback (most recent call last):
+  File "/Users/alexelexa/Homework_DS/shop/shop/decorators.py", line 13, in wrapper
+    result = func(request)
+  File "/Users/alexelexa/Homework_DS/shop/shop/views.py", line 139, in product_edit
+    optional_params=['category', 'name'])
+  File "/Users/alexelexa/Homework_DS/shop/shop/views.py", line 36, in parse_data
+    parse_field(data, reader.get(field), field)
+AttributeError: 'str' object has no attribute 'get'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexelexa/Homework_DS/shop/venv/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/Users/alexelexa/Homework_DS/shop/venv/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/alexelexa/Homework_DS/shop/venv/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/alexelexa/Homework_DS/shop/shop/decorators.py", line 24, in wrapper
+    result = e.message
+AttributeError: 'AttributeError' object has no attribute 'message'
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 500 27
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 28
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 28
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 28
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 52
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 200 0
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 52
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 28
+Bad Request: /database/product/edit
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 400 28
+"PUT /database/product/edit?code=xo3 HTTP/1.1" 200 0
+"GET /database/products_list HTTP/1.1" 200 448
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/alexelexa/Homework_DS/shop/shop/views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/create
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Bad Request: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product/delete
+Not Found: /database/product
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product/edit
+Bad Request: /database/product
+Not Found: /database/product
+"GET /database/products_list HTTP/1.1" 200 448
+"GET /database/products_list?size=1 HTTP/1.1" 200 227
+"GET /database/products_list?size=1&&list=1 HTTP/1.1" 200 208
+"GET /database/products_list?size=1&list=1 HTTP/1.1" 200 208
