@@ -1,8 +1,8 @@
-# for running without docker:
+### for running without docker:
 ./run
 
-# for running tests:
+### for running tests:
 python manage.py test
 
-# log file name (current dir):
+### log file name (current dir):
 {logging level}.log
