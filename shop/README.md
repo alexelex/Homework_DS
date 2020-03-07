@@ -1,2 +1,8 @@
-python manage.py migrate --run-syncdb
-python manage.py runserver
+# for running without docker:
+./run
+
+# for running tests:
+python manage.py test
+
+# log file name (current dir):
+{logging level}.log
