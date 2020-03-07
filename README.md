@@ -2,10 +2,10 @@
 
 [drive with HWs](https://drive.google.com/drive/folders/1-pz_xoxf1lW6DwPubDBJ1L8k_fY-nlx-)
 
-### START
+### start
 to start the project run `docker-compose up`
 
-### Description
+### description
 online store
 REST API, SQLite, Django
 
