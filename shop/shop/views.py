@@ -155,7 +155,7 @@ def products_list(request):
 
     products = Products.objects.all().order_by('time_create')
     products_count = products.count()
-    if products_count <= list_num * list_size:
+    if products_count < list_num * list_size:
         return {'products': []}
 
     products = products[list_size * list_num: list_size * (list_num + 1)]
