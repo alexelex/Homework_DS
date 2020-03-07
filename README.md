@@ -5,8 +5,9 @@
 # START
 to start the project run `docker-compose up`
 
-# Project
+# Description
 online store
+REST API, SQLite, Django
 
 # API Documentation
 [Postman](https://documenter.getpostman.com/view/10647848/SzRxV9su?version=latest)
