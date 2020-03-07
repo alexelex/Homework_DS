@@ -24,13 +24,15 @@ API for online store using SQLite, Django
 * **Response**: Found product
 * **Description**: return product description
 * **Response example**:
-`{
+``` json
+{
   "name": "Lada",
   "code": "42",
   "category": "car",
   "create time": "2020-03-05T11:44:15.801Z",
   "modified time": "2020-03-05T11:44:15.801Z"
-}`
+}
+```
 
 ### CREATE
 * **HTTP method**: POST
@@ -56,7 +58,8 @@ API for online store using SQLite, Django
 * **Response**: list of products and (optional, if page isn't last) next-url like database/products_list?list={number}&&size={number}
 * **Description**: list view of products, numbered from 0
 * **Response example**:
-`{
+``` json
+{
   "products": [
     {
       "name": "Lada",
@@ -67,4 +70,5 @@ API for online store using SQLite, Django
     }
   ],
   "next-url": "database/products_list?list=2&&size=50"
-}`
+}
+```
