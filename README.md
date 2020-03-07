@@ -9,4 +9,4 @@ to start the project run `docker-compose up`
 online store
 
 # API Documentation
-[Postman](https://documenter.getpostman.com/view/10647848/SzRxV9su?version=latest#30ca506d-35e5-4b29-952c-89a3dde19a0f)
+[Postman](https://documenter.getpostman.com/view/10647848/SzRxV9su?version=latest)
