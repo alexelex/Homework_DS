@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
   web:
     build: .
-    command: ./run
+    command: sh -c "chmod +x run && ./run"
     volumes:
       - .:/code
     ports:

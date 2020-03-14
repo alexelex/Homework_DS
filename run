@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Wait for database start"
-wait-for-it.sh db:5432
+chmod +x wait_for_it.sh
+wait_for_it.sh db:5432
 echo "Apply database migrations"
 python manage.py migrate
 echo "Starting server"
