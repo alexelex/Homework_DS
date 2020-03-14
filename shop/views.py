@@ -111,10 +111,9 @@ def get_product_json(product):
 
 class ProductRequest(View):
 
-
     @access_and_errors
     @http_method('POST')
-    def product_create(request):
+    def product_create(self, request):
         logger.debug("product_create")
         check_request_type(request, 'POST')
         logger.info(request.POST)
@@ -127,7 +126,7 @@ class ProductRequest(View):
 
     @access_and_errors
     @http_method('DELETE')
-    def product_delete(request):
+    def product_delete(self, request):
         logger.debug("product_delete")
         check_request_type(request, 'DELETE')
         data = parse_data(
@@ -139,7 +138,7 @@ class ProductRequest(View):
 
     @access_and_errors
     @http_method('PUT')
-    def product_edit(request):
+    def product_edit(self, request):
         logger.debug("product_edit")
         check_request_type(request, 'PUT')
 
@@ -156,7 +155,7 @@ class ProductRequest(View):
 
     @access_and_errors
     @http_method('GET')
-    def product_info(request):
+    def product_info(self, request):
         logger.debug("product_info")
         check_request_type(request, 'GET')
         if 'code' not in request.GET:
