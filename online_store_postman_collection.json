@@ -397,7 +397,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/database/product/create",
+					"raw": "http://0.0.0.0:8000/database/product",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -408,8 +408,7 @@
 					"port": "8000",
 					"path": [
 						"database",
-						"product",
-						"create"
+						"product"
 					]
 				},
 				"description": "create new product with custom unique code"
@@ -456,7 +455,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/create",
+							"raw": "http://0.0.0.0:8000/database/product",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -467,8 +466,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"create"
+								"product"
 							]
 						}
 					},
@@ -542,7 +540,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/create",
+							"raw": "http://0.0.0.0:8000/database/product",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -553,8 +551,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"create"
+								"product"
 							]
 						}
 					},
@@ -627,7 +624,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/create",
+							"raw": "http://0.0.0.0:8000/database/product",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -638,8 +635,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"create"
+								"product"
 							]
 						}
 					},
@@ -695,7 +691,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/database/product/edit?code=s42",
+					"raw": "http://0.0.0.0:8000/database/product?code=s42",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -706,8 +702,7 @@
 					"port": "8000",
 					"path": [
 						"database",
-						"product",
-						"edit"
+						"product"
 					],
 					"query": [
 						{
@@ -742,7 +737,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/edit?code=s42",
+							"raw": "http://0.0.0.0:8000/database/product?code=s42",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -753,8 +748,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"edit"
+								"product"
 							],
 							"query": [
 								{
@@ -815,7 +809,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/edit?code=s42",
+							"raw": "http://0.0.0.0:8000/database/product?code=s42",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -826,8 +820,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"edit"
+								"product"
 							],
 							"query": [
 								{
@@ -888,7 +881,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/edit?code=s42",
+							"raw": "http://0.0.0.0:8000/database/product?code=s42",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -899,8 +892,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"edit"
+								"product"
 							],
 							"query": [
 								{
@@ -954,7 +946,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:8000/database/product/delete?code=s42",
+					"raw": "http://0.0.0.0:8000/database/product?code=s42",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -965,14 +957,12 @@
 					"port": "8000",
 					"path": [
 						"database",
-						"product",
-						"delete"
+						"product"
 					],
 					"query": [
 						{
 							"key": "code",
-							"value": "s42",
-							"description": "required"
+							"value": "s42"
 						}
 					]
 				},
@@ -992,7 +982,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/delete",
+							"raw": "http://0.0.0.0:8000/database/product",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -1003,8 +993,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"delete"
+								"product"
 							],
 							"query": [
 								{
@@ -1057,7 +1046,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/delete?code=s42",
+							"raw": "http://0.0.0.0:8000/database/product?code=s42",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -1068,8 +1057,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"delete"
+								"product"
 							],
 							"query": [
 								{
@@ -1121,7 +1109,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://0.0.0.0:8000/database/product/delete?code=s41",
+							"raw": "http://0.0.0.0:8000/database/product?code=s41",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -1132,8 +1120,7 @@
 							"port": "8000",
 							"path": [
 								"database",
-								"product",
-								"delete"
+								"product"
 							],
 							"query": [
 								{
