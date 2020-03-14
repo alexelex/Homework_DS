@@ -2,7 +2,9 @@
 import json
 import logging
 
-from shop.decorators import access_and_errors
+from django.views import View
+
+from shop.decorators import access_and_errors, http_method
 from shop.models import Products
 from shop.exceptions import RequestFatal, RequestWarning
 
@@ -107,43 +109,66 @@ def get_product_json(product):
     return data
 
 
-@access_and_errors
-def product_create(request):
-    logger.debug("product_create")
-    check_request_type(request, 'POST')
-    logger.info(request.POST)
-    data = parse_data(
-        request=request,
-        required_params=['name', 'code', 'category'])
-    # TODO: add author to data
-    add_product(data)
+class ProductRequest(View):
 
 
-@access_and_errors
-def product_delete(request):
-    logger.debug("product_delete")
-    check_request_type(request, 'DELETE')
-    data = parse_data(
-        request=request,
-        required_params=['code'])
-    # TODO: add author to data as modifier
-    delete_product(data)
+    @access_and_errors
+    @http_method('POST')
+    def product_create(request):
+        logger.debug("product_create")
+        check_request_type(request, 'POST')
+        logger.info(request.POST)
+        data = parse_data(
+            request=request,
+            required_params=['name', 'code', 'category'])
+        # TODO: add author to data
+        add_product(data)
 
 
-@access_and_errors
-def product_edit(request):
-    logger.debug("product_edit")
-    check_request_type(request, 'PUT')
+    @access_and_errors
+    @http_method('DELETE')
+    def product_delete(request):
+        logger.debug("product_delete")
+        check_request_type(request, 'DELETE')
+        data = parse_data(
+            request=request,
+            required_params=['code'])
+        # TODO: add author to data as modifier
+        delete_product(data)
 
-    if 'code' not in request.GET:
-        raise RequestFatal(400, 'required field: code')
-    code = request.GET.get('code')
 
-    data = parse_data(
-        request=request,
-        optional_params=['category', 'name'])
-    # TODO: add author to data as modifier
-    update_product(code, data)
+    @access_and_errors
+    @http_method('PUT')
+    def product_edit(request):
+        logger.debug("product_edit")
+        check_request_type(request, 'PUT')
+
+        if 'code' not in request.GET:
+            raise RequestFatal(400, 'required field: code')
+        code = request.GET.get('code')
+
+        data = parse_data(
+            request=request,
+            optional_params=['category', 'name'])
+        # TODO: add author to data as modifier
+        update_product(code, data)
+
+
+    @access_and_errors
+    @http_method('GET')
+    def product_info(request):
+        logger.debug("product_info")
+        check_request_type(request, 'GET')
+        if 'code' not in request.GET:
+            raise RequestFatal(400, 'required field: code')
+        code = request.GET.get('code')
+
+        products = Products.objects.filter(code=code)
+        if len(products) > 1:
+            raise RequestFatal(500, 'More than one product with code {}'.format(code))
+        if len(products) == 0:
+            raise RequestFatal(404)
+        return get_product_json(products[0])
 
 
 @access_and_errors
@@ -165,19 +190,3 @@ def products_list(request):
         response.update({
             'next-url': 'database/products_list?list={}&&size={}'.format(list_num + 1, list_size)})
     return response
-
-
-@access_and_errors
-def product_info(request):
-    logger.debug("product_info")
-    check_request_type(request, 'GET')
-    if 'code' not in request.GET:
-        raise RequestFatal(400, 'required field: code')
-    code = request.GET.get('code')
-
-    products = Products.objects.filter(code=code)
-    if len(products) > 1:
-        raise RequestFatal(500, 'More than one product with code {}'.format(code))
-    if len(products) == 0:
-        raise RequestFatal(404)
-    return get_product_json(products[0])

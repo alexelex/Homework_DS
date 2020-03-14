@@ -6,11 +6,18 @@ from shop.exceptions import RequestFatal, RequestWarning
 logger = logging.getLogger(__name__)
 
 
-def access_and_errors(func):
+def http_method(func):
+    def wrapper(request, method):
+        if request.method != method:
+            return
+        return func(request, method)
+    return wrapper
+
+def access_and_errors(func, **kwargs):
     def wrapper(request):
         status, result = 200, None
         try:
-            result = func(request)
+            result = func(request, **kwargs)
         except RequestFatal as e:
             status = e.code
             result = e.message
