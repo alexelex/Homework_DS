@@ -19,14 +19,6 @@ from shop import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('database/product', views.ProductRequest.as_view()),
-#    path('database/product/delete', views.product_delete),
-#    path('database/product/edit', views.product_edit),
-#    path('database/product/create', views.product_create),
+    path('database/product', views.product_handlers),
     path('database/products_list', views.products_list),
-    # path('product/create/?', views.product_create, name='product_create'),
-    # path('product/<slug:product>/__delete__/?', views.product_delete, name='product_delete'),
-    # path('product/<slug:product>/__edit__/?', views.product_edit, name='product_edit'),
-    # path('product/<slug:product>/__info__/?', views.product_info, name='product_info'),
-    # path('product/list/?', views.products_list, name='products_list'),
 ]

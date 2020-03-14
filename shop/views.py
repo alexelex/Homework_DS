@@ -2,9 +2,7 @@
 import json
 import logging
 
-from django.views import View
-
-from shop.decorators import access_and_errors, http_method
+from shop.decorators import access_and_errors
 from shop.models import Products
 from shop.exceptions import RequestFatal, RequestWarning
 
@@ -108,66 +106,62 @@ def get_product_json(product):
         data.update({'modifier': product.modifier})
     return data
 
+@access_and_errors
+def product_handlers(request):
+    request_type = request.method.lower()
+    if request_type not in ['get', 'post', 'put', 'delete']:
+        raise RequestFatal(
+            405, 'expected one of {get, post, put, delete} request, got {}'.format(request_type))
 
-class ProductRequest(View):
-
-    @access_and_errors
-    @http_method('POST')
-    def product_create(self, request):
-        logger.debug("product_create")
-        check_request_type(request, 'POST')
-        logger.info(request.POST)
-        data = parse_data(
-            request=request,
-            required_params=['name', 'code', 'category'])
-        # TODO: add author to data
-        add_product(data)
+    handler = globals()['product_handler_{}'.format(request_type)]
+    logger.info(handler.__name__)
+    return handler(request)
 
 
-    @access_and_errors
-    @http_method('DELETE')
-    def product_delete(self, request):
-        logger.debug("product_delete")
-        check_request_type(request, 'DELETE')
-        data = parse_data(
-            request=request,
-            required_params=['code'])
-        # TODO: add author to data as modifier
-        delete_product(data)
+def product_handler_post(request):
+    logger.debug("product_create")
+    logger.info(request.POST)
+    data = parse_data(
+        request=request,
+        required_params=['name', 'code', 'category'])
+    # TODO: add author to data
+    add_product(data)
 
 
-    @access_and_errors
-    @http_method('PUT')
-    def product_edit(self, request):
-        logger.debug("product_edit")
-        check_request_type(request, 'PUT')
-
-        if 'code' not in request.GET:
-            raise RequestFatal(400, 'required field: code')
-        code = request.GET.get('code')
-
-        data = parse_data(
-            request=request,
-            optional_params=['category', 'name'])
-        # TODO: add author to data as modifier
-        update_product(code, data)
+def product_handler_delete(request):
+    logger.debug("product_delete")
+    data = parse_data(
+        request=request,
+        required_params=['code'])
+    # TODO: add author to data as modifier
+    delete_product(data)
 
 
-    @access_and_errors
-    @http_method('GET')
-    def product_info(self, request):
-        logger.debug("product_info")
-        check_request_type(request, 'GET')
-        if 'code' not in request.GET:
-            raise RequestFatal(400, 'required field: code')
-        code = request.GET.get('code')
+def product_handler_put(request):
+    logger.debug("product_edit")
+    if 'code' not in request.GET:
+        raise RequestFatal(400, 'required field: code')
+    code = request.GET.get('code')
 
-        products = Products.objects.filter(code=code)
-        if len(products) > 1:
-            raise RequestFatal(500, 'More than one product with code {}'.format(code))
-        if len(products) == 0:
-            raise RequestFatal(404)
-        return get_product_json(products[0])
+    data = parse_data(
+        request=request,
+        optional_params=['category', 'name'])
+    # TODO: add author to data as modifier
+    update_product(code, data)
+
+
+def product_handler_get(request):
+    logger.debug("product_info")
+    if 'code' not in request.GET:
+        raise RequestFatal(400, 'required field: code')
+    code = request.GET.get('code')
+
+    products = Products.objects.filter(code=code)
+    if len(products) > 1:
+        raise RequestFatal(500, 'More than one product with code {}'.format(code))
+    if len(products) == 0:
+        raise RequestFatal(404)
+    return get_product_json(products[0])
 
 
 @access_and_errors
@@ -176,6 +170,9 @@ def products_list(request):
     check_request_type(request, 'GET')
     list_num = int(request.GET.get('list', '0'))
     list_size = int(request.GET.get('size', '100'))
+
+    if list_size <= 0:
+        raise RequestFatal(400, 'size must be more than 0')
 
     products = Products.objects.all().order_by('time_create')
     products_count = products.count()
