@@ -359,15 +359,15 @@
 			]
 		},
 		{
-			"name": "http://0.0.0.0:8000/database/product/create",
+			"name": "http://0.0.0.0:8000/database/product create",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "text/plain",
-						"type": "text"
+						"type": "text",
+						"value": "text/plain"
 					}
 				],
 				"body": {
@@ -670,15 +670,15 @@
 			]
 		},
 		{
-			"name": "http://0.0.0.0:8000/database/product/edit",
+			"name": "http://0.0.0.0:8000/database/product edit",
 			"request": {
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
@@ -934,7 +934,7 @@
 			]
 		},
 		{
-			"name": "http://0.0.0.0:8000/database/product/delete",
+			"name": "http://0.0.0.0:8000/database/product delete",
 			"request": {
 				"method": "DELETE",
 				"header": [],
