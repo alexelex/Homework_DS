@@ -22,7 +22,7 @@ def parse_field(data, var, name, to_dict=False):
 def parse_data(request, required_params=[], optional_params=[]):
     logger.debug("parse_data")
     data = {}
-    if request.method == 'PUT':
+    if request.method in ('PUT', 'POST'):
         try:
             reader = request.body.decode()
             reader = reader.replace("\'", "\"")
@@ -35,13 +35,9 @@ def parse_data(request, required_params=[], optional_params=[]):
             raise RequestFatal(400, 'expected data in json format')
 
     for field in required_params + optional_params:
-        if request.method == 'POST':
-            parse_field(data, request.POST.get(field), field)
-        elif request.method == 'PUT':
+        if request.method in ('PUT', 'POST'):
             parse_field(data, reader.get(field), field)
-        elif request.method == 'GET':
-            parse_field(data, request.GET.get(field), field)
-        elif request.method == 'DELETE':
+        elif request.method in ('GET', 'DELETE'):
             parse_field(data, request.GET.get(field), field)
 
     for field in required_params:
@@ -64,7 +60,7 @@ def add_product(data):
     )
 
     if not created:
-        raise RequestWarning(208)
+        raise RequestWarning(208, 'Already added')
     Products.objects.filter(code=data['code']).update(**data)
 
 
@@ -76,7 +72,7 @@ def delete_product(data):
     if note.exists():
         note.delete()
     else:
-        raise RequestFatal(404)
+        raise RequestFatal(404, 'Product not found')
 
 
 def update_product(code, data):
@@ -85,7 +81,7 @@ def update_product(code, data):
     )
 
     if not note.exists():
-        raise RequestFatal(404)
+        raise RequestFatal(404, 'Product not found')
     if note.count() > 1:
         raise RequestFatal(500)
     note.update(**data)
@@ -126,6 +122,7 @@ def product_handler_post(request):
         required_params=['name', 'code', 'category'])
     # TODO: add author to data
     add_product(data)
+    return 'success create with code {}'.format(data['code'])
 
 
 def product_handler_delete(request):
@@ -135,6 +132,7 @@ def product_handler_delete(request):
         required_params=['code'])
     # TODO: add author to data as modifier
     delete_product(data)
+    return 'success delete with code {}'.format(data['code'])
 
 
 def product_handler_put(request):
@@ -148,6 +146,7 @@ def product_handler_put(request):
         optional_params=['category', 'name'])
     # TODO: add author to data as modifier
     update_product(code, data)
+    return 'success put with code {}'.format(code)
 
 
 def product_handler_get(request):
@@ -160,7 +159,7 @@ def product_handler_get(request):
     if len(products) > 1:
         raise RequestFatal(500, 'More than one product with code {}'.format(code))
     if len(products) == 0:
-        raise RequestFatal(404)
+        raise RequestFatal(404, 'Product not found')
     return get_product_json(products[0])
 
 
@@ -177,10 +176,12 @@ def products_list(request):
     products = Products.objects.all().order_by('time_create')
     products_count = products.count()
     if products_count < list_num * list_size:
-        return {'products': []}
+        return {'products': [],
+                'total_count': products_count}
 
     products = products[list_size * list_num: list_size * (list_num + 1)]
-    response = {'products': [get_product_json(product) for product in products]}
+    response = {'products': [get_product_json(product) for product in products],
+                'total_count': products_count}
 
     if products_count > list_size * (list_num + 1):
         response.update({

@@ -23,9 +23,8 @@ def access_and_errors(func):
             status = 500
             result = e.message
             logger.error("unexpected Exception: {}".format(result))
-        if result is None:
-            return HttpResponse(status=status)
-        if status == 200:
-            return JsonResponse(result, status=status, safe=False)
-        return HttpResponse(result, status=status)
+
+        response = {'code': status,
+                    'response': result}
+        return JsonResponse(response, status=status, safe=False)
     return wrapper
