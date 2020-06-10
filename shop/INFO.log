@@ -75,3 +75,31 @@ Not Found: /database/product
 "PUT /database/product?code=code HTTP/1.1" 404 46
 Not Found: /database/product
 "PUT /database/product?code=code HTTP/1.1" 404 46
+Bad Request: /database/product
+"POST /database/product HTTP/1.1" 400 49
+Bad Request: /database/product
+"POST /database/product HTTP/1.1" 400 49
+"POST /database/product HTTP/1.1" 200 58
+"PUT /database/product?code=code HTTP/1.1" 200 55
+"GET /database/product?code=code HTTP/1.1" 200 219
+"PUT /database/product?code=code HTTP/1.1" 200 55
+"GET /database/product?code=code HTTP/1.1" 200 219
+"GET /database/products_list HTTP/1.1" 200 253
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 48
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /database/product
+"PUT /database/product?code=code HTTP/1.1" 401 48
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /database/product
+"PUT /database/product?code=code HTTP/1.1" 401 48

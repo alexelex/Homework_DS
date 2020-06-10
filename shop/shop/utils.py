@@ -20,12 +20,12 @@ def get_reader(request):
         reader = request.body.decode()
         reader = reader.replace("\'", "\"")
         if not reader:
-            raise RequestFatal(400, 'expected data in json format (current data is empty)')
+            raise RequestFatal(400, 'Expected data in json format (current data is empty)')
         reader = json.loads(reader)
     except RequestFatal as e:
         raise e
     except Exception as e:
-        raise RequestFatal(400, 'expected data in json format')
+        raise RequestFatal(400, 'Expected data in json format')
     return reader
 
 
@@ -56,16 +56,16 @@ def check_token(request):
     try:
         r = requests.post(url=url, data=json.dumps(data))
     except:
-        raise RequestFatal(500, "no connection to authorization service")
+        raise RequestFatal(500, "No connection to authorization service")
 
     try:
         r.raise_for_status()
     except Exception:
         if r.status_code >= 400:
-            raise RequestFatal(r.status_code, "authorization error")
+            raise RequestFatal(401, "Authorization error")
 
     if r.json().get("response") is None:
-        raise RequestFatal(500, "no response in authorization service response")
+        raise RequestFatal(500, "No response in authorization service response")
     if r.json()["response"].get("email") is None:
-        raise RequestFatal(500, "no email in authorization service response")
+        raise RequestFatal(500, "No email in authorization service response")
     return r.json()["response"].get("email")
