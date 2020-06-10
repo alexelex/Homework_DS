@@ -1,4 +1,5 @@
 import secrets
+import datetime
 from .decorators import access_and_errors
 from .models import Users
 from .exceptions import RequestFatal, RequestWarning
@@ -12,7 +13,7 @@ def add_user(data):
 
     if not created:
         raise RequestWarning(208, 'Already added')
-    Users.objects.filter(code=data['code']).update(**data)
+    Users.objects.filter(email=data['email']).update(**data)
 
 
 def activate(data):
@@ -86,6 +87,8 @@ def validate(token):
     note = note[0]
     if not note.activated:
         raise RequestFatal(400, 'Account not activated')
+    if note.time_modified.replace(tzinfo=None) <= datetime.datetime.now() - datetime.timedelta(hours=2):
+        raise RequestFatal(401, 'Old token')
     return note.email
 
 

@@ -9,7 +9,9 @@ services:
       POSTGRES_PASSWORD: password
 
   web:
-    build: ./shop
+    build:
+      context: shop
+      dockerfile: Dockerfile
     command: sh -c "cd shop && chmod +x run && ./run"
     volumes:
       - .:/code
@@ -20,7 +22,9 @@ services:
       - auth
 
   auth:
-    build: ./authorization
+    build:
+      context: authorization
+      dockerfile: Dockerfile
     command: sh -c "cd authorization && chmod +x run && ./run"
     volumes:
       - .:/auth_code

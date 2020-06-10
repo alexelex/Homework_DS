@@ -3,3 +3,75 @@ Watching for file changes with StatReloader
 /code/shop/shop/utils.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 67
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /database/product
+Traceback (most recent call last):
+  File "/code/shop/shop/decorators.py", line 13, in wrapper
+    result = func(request)
+  File "/code/shop/shop/views.py", line 76, in product_handlers
+    return handler(request)
+  File "/code/shop/shop/views.py", line 101, in product_handler_put
+    modifier = check_token(request)
+  File "/code/shop/shop/utils.py", line 57, in check_token
+    r = requests.post(url=url, data=json.dumps(data))
+  File "/usr/local/lib/python3.8/site-packages/requests/api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/requests/sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.8/site-packages/requests/sessions.py", line 637, in send
+    adapter = self.get_adapter(url=request.url)
+  File "/usr/local/lib/python3.8/site-packages/requests/sessions.py", line 728, in get_adapter
+    raise InvalidSchema("No connection adapters were found for {!r}".format(url))
+requests.exceptions.InvalidSchema: No connection adapters were found for 'auth:8001/validation'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/code/shop/shop/decorators.py", line 24, in wrapper
+    result = e.message
+AttributeError: 'InvalidSchema' object has no attribute 'message'
+"PUT /database/product?code=code HTTP/1.1" 500 27
+/code/shop/shop/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 48
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 48
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 48
+Watching for file changes with StatReloader
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 48
+Watching for file changes with StatReloader
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 48
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 48
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 48
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 46
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 67
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 48
+Internal Server Error: /database/product
+"PUT /database/product?code=code HTTP/1.1" 500 67
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 46
+Not Found: /database/product
+"PUT /database/product?code=code HTTP/1.1" 404 46

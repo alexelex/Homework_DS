@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
 from .default_settings import *
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
@@ -36,7 +35,7 @@ LOGGING = {
 }
 
 AUTHORIZATION = {
-    "base_path": "auth",
+    "base_path": "http://auth",
     "verify_api": "/validation",
     "port": 8001,
 }
