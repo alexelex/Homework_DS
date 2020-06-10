@@ -51,10 +51,21 @@ def parse_data(request, required_params=[], optional_params=[]):
 def check_token(request):
     token = request.META.get("HTTP_AUTHORIZATION", "").split("Bearer ")[-1]
     url = "{base_path}:{port}{verify_api}".format(**AUTHORIZATION)
+    data = {"token": token}
 
-    response = requests.post(
-        url="http://auth:" + os.environ.get("AUTH_PORT") + "/api/verify_token",
-        data={
-            "token": token,
-        },
-    )
+    try:
+        r = requests.post(url=url, data=json.dumps(data))
+    except:
+        raise RequestFatal(500, "no connection to authorization service")
+
+    try:
+        r.raise_for_status()
+    except Exception:
+        if r.status_code >= 400:
+            raise RequestFatal(r.status_code, "authorization error")
+
+    if r.json().get("response") is None:
+        raise RequestFatal(500, "no response in authorization service response")
+    if r.json()["response"].get("email") is None:
+        raise RequestFatal(500, "no email in authorization service response")
+    return r.json()["response"].get("email")
