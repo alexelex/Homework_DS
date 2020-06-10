@@ -1,0 +1,5 @@
+Watching for file changes with StatReloader
+"PUT /database/product?code=code HTTP/1.1" 200 55
+/code/shop/shop/utils.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

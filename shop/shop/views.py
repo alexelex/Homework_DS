@@ -46,6 +46,7 @@ def update_product(code, data):
     if note.count() > 1:
         raise RequestFatal(500)
     note.update(**data)
+    note[0].save()
 
 
 def get_product_json(product):
@@ -76,27 +77,28 @@ def product_handlers(request):
 
 
 def product_handler_post(request):
+    author = check_token(request)
     logger.debug("product_create")
-    logger.info(request.POST)
     data = parse_data(
         request=request,
         required_params=['name', 'code', 'category'])
-    # TODO: add author to data
+    data.update({"author": author})
     add_product(data)
     return 'success create with code {}'.format(data['code'])
 
 
 def product_handler_delete(request):
+    check_token(request)
     logger.debug("product_delete")
     data = parse_data(
         request=request,
         required_params=['code'])
-    # TODO: add author to data as modifier
     delete_product(data)
     return 'success delete with code {}'.format(data['code'])
 
 
 def product_handler_put(request):
+    modifier = check_token(request)
     logger.debug("product_edit")
     if 'code' not in request.GET:
         raise RequestFatal(400, 'required field: code')
@@ -105,7 +107,7 @@ def product_handler_put(request):
     data = parse_data(
         request=request,
         optional_params=['category', 'name'])
-    # TODO: add author to data as modifier
+    data.update({"modifier": modifier})
     update_product(code, data)
     return 'success put with code {}'.format(code)
 

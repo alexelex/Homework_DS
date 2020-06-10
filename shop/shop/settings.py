@@ -37,6 +37,6 @@ LOGGING = {
 
 AUTHORIZATION = {
     "base_path": "auth",
-    "verify_api": "/verification",
+    "verify_api": "/validation",
     "port": 8001,
 }
