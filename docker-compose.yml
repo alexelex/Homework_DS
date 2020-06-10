@@ -8,11 +8,22 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
   web:
-    build: .
-    command: sh -c "chmod +x run && ./run"
+    build: ./shop
+    command: sh -c "cd shop && chmod +x run && ./run"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+      - auth
+
+  auth:
+    build: ./authorization
+    command: sh -c "cd authorization && chmod +x run && ./run"
+    volumes:
+      - .:/auth_code
+    ports:
+      - "8001:8001"
     depends_on:
       - db
