@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from shop.default_settings import *
+from .default_settings import *
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 
@@ -33,4 +33,10 @@ LOGGING = {
             'propagate': True,
         },
     },
+}
+
+AUTHORIZATION = {
+    "base_path": "auth",
+    "verify_api": "/verification",
+    "port": 8001,
 }

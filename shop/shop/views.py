@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-#
-import json
 import logging
 
 from .decorators import access_and_errors
 from .models import Products
 from .exceptions import RequestFatal, RequestWarning
-from .urls import parse_get, parse_post
+from .utils import parse_data, check_token
 
 logger = logging.getLogger(__name__)
 
