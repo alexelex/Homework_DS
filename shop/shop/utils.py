@@ -7,8 +7,8 @@ import requests
 from .exceptions import RequestFatal
 from .settings import AUTHORIZATION, GRPC
 
-from genrpc.auth_pb2_grpc import AuthStub
-from genrpc.auth_pb2 import Token
+from genrpc.config_pb2_grpc import AuthStub
+from genrpc.config_pb2 import Token
 
 logger = logging.getLogger(__name__)
 

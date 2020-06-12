@@ -1,11 +1,11 @@
 from django_grpc_framework.services import Service
 from django_grpc_framework import proto_serializers
 from .models import UserInfo, Users
-from genrpc import auth_pb2, auth_pb2_grpc
+from genrpc import config_pb2, config_pb2_grpc
 import datetime
 
 def handlers(server):
-    auth_pb2_grpc.add_AuthServicer_to_server(Auth.as_servicer(), server)
+    config_pb2_grpc.add_AuthServicer_to_server(Auth.as_servicer(), server)
 
 class Auth(Service):
     def Verification(self, request, context):
@@ -34,5 +34,5 @@ class Auth(Service):
 class UserInfoSerializer(proto_serializers.ModelProtoSerializer):
     class Meta:
         model = UserInfo
-        proto_class = auth_pb2.UserInfo
+        proto_class = config_pb2.UserInfo
         fields = ['verify_status', 'email', 'role']
