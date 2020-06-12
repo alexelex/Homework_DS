@@ -136,3 +136,11 @@ Not Found: /database/product
 "GET /database/products_list?list=2&size=1 HTTP/1.1" 200 243
 "GET /database/products_list HTTP/1.1" 200 611
 "GET /database/product?code=123 HTTP/1.1" 200 209
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

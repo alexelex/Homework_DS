@@ -125,7 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 ACTIVATION = {
-    "base_path": "http://auth",
+    "base_path": "http://0.0.0.0",
     "url": "/activation",
     "port": 8001,
 }

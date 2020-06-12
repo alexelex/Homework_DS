@@ -1,7 +1,7 @@
 import smtplib
 import pika
 import json
-from .config import SERVER, LOGIN
+from config import SERVER, LOGIN
 
 def callback(ch, method, _, data):
     try:

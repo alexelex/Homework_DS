@@ -46,8 +46,10 @@ services:
   notify:
     build:
       context: notify
-      dockerfile: notify/Dockerfile
+      dockerfile: Dockerfile
     command: sh -c "cd notify && chmod +x run && ./run"
+    volumes:
+      - .:/notify_code
     ports:
       - "8002:8002"
     depends_on:

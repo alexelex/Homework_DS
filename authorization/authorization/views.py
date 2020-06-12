@@ -9,6 +9,7 @@ from .utils import parse_data, notify
 def add_user(data):
     note, created = Users.objects.get_or_create(
         email=data['email'],
+        refresh_token=secrets.token_urlsafe(32),
     )
 
     if not created:
@@ -99,7 +100,7 @@ def registration(request):
     data = parse_data(request, ["email", "password"])
     user = add_user(data)
     notify(user)
-    return "{}, account was successfully created"
+    return "{}, account was successfully created".format(data["email"])
 
 
 @access_and_errors
