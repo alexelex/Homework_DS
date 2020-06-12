@@ -24,7 +24,6 @@ def access_and_errors(func):
             result = e.message
             logger.error("unexpected Exception: {}".format(result))
 
-        response = {'code': status,
-                    'response': result}
+        response = {'response': result}
         return JsonResponse(response, status=status, safe=False)
     return wrapper

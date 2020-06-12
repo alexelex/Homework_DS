@@ -13,9 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+import sys
 from django.contrib import admin
 from django.urls import path
 from . import views
+from . import grpc
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +28,10 @@ urlpatterns = [
     path('update_token', views.update_token),
     path('validation', views.validation)
 ]
+
+if os.environ.get("WITH_GRPC"):
+    # https://stackoverflow.com/questions/31291608/effect-of-using-sys-path-insert0-path-and-sys-pathappend-when-loading-modul
+    sys.path.insert(0, "..")
+
+    def generate_handlers(server):
+        grpc.handlers(server)

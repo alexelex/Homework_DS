@@ -19,11 +19,9 @@ services:
 
   web:
     build:
-      context: shop
-      dockerfile: Dockerfile
-    command: sh -c "cd shop && chmod +x run && ./run"
-    volumes:
-      - .:/code
+      context: .
+      dockerfile: shop/Dockerfile
+    command: sh -c "chmod +x run && ./run"
     ports:
       - "8000:8000"
     depends_on:
@@ -32,11 +30,9 @@ services:
 
   auth:
     build:
-      context: authorization
-      dockerfile: Dockerfile
-    command: sh -c "cd authorization && chmod +x run && ./run"
-    volumes:
-      - .:/auth_code
+      context: .
+      dockerfile: authorization/Dockerfile
+    command: sh -c "chmod +x run && ./run"
     ports:
       - "8001:8001"
     depends_on:
@@ -54,3 +50,19 @@ services:
       - "8002:8002"
     depends_on:
       - mq
+
+  authorization-grpc:
+    build:
+      context: .
+      dockerfile: authorization/Dockerfile
+    environment:
+      - WITH_GRPC=1
+    command: sh -c "chmod +x run_grpc && ./run_grpc"
+    volumes:
+    - .:/auth_code
+    ports:
+      - "8003:8003"
+    depends_on:
+      - db
+      - mq
+      - auth

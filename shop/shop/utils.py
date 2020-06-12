@@ -1,8 +1,14 @@
+import grpc
 import json
 import logging
+import os
 import requests
+
 from .exceptions import RequestFatal
-from .settings import AUTHORIZATION
+from .settings import AUTHORIZATION, GRPC
+
+from genrpc.auth_pb2_grpc import AuthStub
+from genrpc.auth_pb2 import Token
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +56,7 @@ def parse_data(request, required_params=[], optional_params=[]):
 
 def check_token(request):
     token = request.META.get("HTTP_AUTHORIZATION", "").split("Bearer ")[-1]
-    url = "{base_path}:{port}{verify_api}".format(**AUTHORIZATION)
+    url = "{host}:{port}{verify_api}".format(**AUTHORIZATION)
     data = {"token": token}
 
     try:
@@ -67,5 +73,19 @@ def check_token(request):
     if r.json().get("response") is None:
         raise RequestFatal(500, "No response in authorization service response")
     if r.json()["response"].get("email") is None:
-        raise RequestFatal(500, "No email in authorization service response")
-    return r.json()["response"].get("email")
+        raise RequestFatal(500, "Authorization error")
+
+def check_token_and_role(request):
+    token = request.META.get("HTTP_AUTHORIZATION", "").split("Bearer ")[-1]
+    auth = "{host}:{port}".format(**GRPC)
+
+    with grpc.insecure_channel(auth) as chan:
+        stub = AuthStub(chan)
+        token_msg = Token(token=token)
+        info = stub.Verify(token_msg)
+
+        if not info.verify_status:
+            raise RequestFatal(401, "Invalid token")
+        if info.role != "moderator":
+            raise RequestFatal(401, "You are just a {}, sorry!".format(info.role))
+    return info.email

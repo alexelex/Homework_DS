@@ -35,7 +35,12 @@ LOGGING = {
 }
 
 AUTHORIZATION = {
-    "base_path": "http://auth",
+    "host": "http://auth",
     "verify_api": "/validation",
     "port": 8001,
+}
+
+GRPC = {
+    "host": "http://authorization-grpc",
+    "port": 8003,
 }

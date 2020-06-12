@@ -3,3 +3,7 @@ django~=2.2.10
 psycopg2
 requests
 pika
+grpcio-tools
+grpcio
+djangogrpcframework
+djangorestframework

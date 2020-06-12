@@ -4,7 +4,7 @@ import logging
 from .decorators import access_and_errors
 from .models import Products
 from .exceptions import RequestFatal, RequestWarning
-from .utils import parse_data, check_token
+from .utils import parse_data, check_token, check_token_and_role
 
 logger = logging.getLogger(__name__)
 
@@ -77,7 +77,7 @@ def product_handlers(request):
 
 
 def product_handler_post(request):
-    author = check_token(request)
+    author = check_token_and_role(request)
     logger.debug("product_create")
     data = parse_data(
         request=request,
@@ -88,7 +88,7 @@ def product_handler_post(request):
 
 
 def product_handler_delete(request):
-    check_token(request)
+    check_token_and_role(request)
     logger.debug("product_delete")
     data = parse_data(
         request=request,
@@ -98,7 +98,7 @@ def product_handler_delete(request):
 
 
 def product_handler_put(request):
-    modifier = check_token(request)
+    modifier = check_token_and_role(request)
     logger.debug("product_edit")
     if 'code' not in request.GET:
         raise RequestFatal(400, 'required field: code')
@@ -113,6 +113,7 @@ def product_handler_put(request):
 
 
 def product_handler_get(request):
+    check_token(request)
     logger.debug("product_info")
     if 'code' not in request.GET:
         raise RequestFatal(400, 'required field: code')
@@ -128,6 +129,7 @@ def product_handler_get(request):
 
 @access_and_errors
 def products_list(request):
+    check_token(request)
     logger.debug("products_list")
     check_request_type(request, 'GET')
     list_num = int(request.GET.get('list', '0'))

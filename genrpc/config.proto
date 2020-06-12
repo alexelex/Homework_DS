@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package authorization;
+
+service Auth {
+  rpc Verification(Token) returns (UserInfo);
+}
+
+message Token {
+  string token = 1;
+}
+
+message UserInfo {
+  bool verify_status = 1;
+  string email = 2;
+  string role = 3;
+}
