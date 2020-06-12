@@ -123,3 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+ACTIVATION = {
+    "base_path": "http://auth",
+    "url": "/activation",
+    "port": 8001,
+}
+
+MQ = {
+    "name": "mq",
+    "port": 5672,
+}

@@ -3,7 +3,7 @@ import datetime
 from .decorators import access_and_errors
 from .models import Users
 from .exceptions import RequestFatal, RequestWarning
-from .utils import parse_data
+from .utils import parse_data, notify
 
 
 def add_user(data):
@@ -14,6 +14,7 @@ def add_user(data):
     if not created:
         raise RequestWarning(208, 'Already added')
     Users.objects.filter(email=data['email']).update(**data)
+    return note
 
 
 def activate(data):
@@ -91,13 +92,13 @@ def validate(token):
         raise RequestFatal(401, 'Old token')
     return note.email
 
-
 @access_and_errors
 def registration(request):
     if request.method != "POST":
         raise RequestFatal(400, "expected POST request")
     data = parse_data(request, ["email", "password"])
-    add_user(data)
+    user = add_user(data)
+    notify(user)
     return "{}, account was successfully created"
 
 

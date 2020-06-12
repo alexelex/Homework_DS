@@ -103,3 +103,36 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Unauthorized: /database/product
 "PUT /database/product?code=code HTTP/1.1" 401 48
+Watching for file changes with StatReloader
+Unauthorized: /database/product
+"PUT /database/product?code=code HTTP/1.1" 401 48
+"PUT /database/product?code=code HTTP/1.1" 200 55
+"GET /database/product?code=code HTTP/1.1" 200 219
+"GET /database/product?code=code HTTP/1.1" 200 219
+"GET /database/products_list HTTP/1.1" 200 253
+"GET /database/products_list HTTP/1.1" 200 253
+"POST /database/product HTTP/1.1" 200 59
+"GET /database/products_list HTTP/1.1" 200 427
+"GET /database/products_list?size=1 HTTP/1.1" 200 306
+Not Found: /database/products_listlist=1&&size=1
+"GET /database/products_listlist=1&&size=1 HTTP/1.1" 404 77
+"GET /database/products_list?list=1&&size=1 HTTP/1.1" 200 233
+"GET /database/products_list?list=1&size=1 HTTP/1.1" 200 233
+Watching for file changes with StatReloader
+Not Found: /database/product
+"GET /database/product?code=s42 HTTP/1.1" 404 46
+Bad Request: /database/product
+"POST /database/product HTTP/1.1" 400 57
+"POST /database/product HTTP/1.1" 200 57
+"GET /database/product?code=123 HTTP/1.1" 200 197
+"GET /database/products_list?list=2&size=20 HTTP/1.1" 200 61
+"GET /database/products_list?list=1&size=1 HTTP/1.1" 200 286
+"GET /database/products_list?list=2&size=1 HTTP/1.1" 200 231
+Not Found: /database/product
+"PUT /database/product?code=s42 HTTP/1.1" 404 46
+"PUT /database/product?code=123 HTTP/1.1" 200 54
+Not Found: /database/product
+"DELETE /database/product?code=s42 HTTP/1.1" 404 46
+"GET /database/products_list?list=2&size=1 HTTP/1.1" 200 243
+"GET /database/products_list HTTP/1.1" 200 611
+"GET /database/product?code=123 HTTP/1.1" 200 209

@@ -1,5 +1,8 @@
 import json
+import pika
 from .exceptions import RequestFatal
+from  urllib.parse import urlencode
+from .settings import ACTIVATION, MQ
 
 def parse_field(data, var, name, to_dict=False):
     if var is not None:
@@ -24,8 +27,8 @@ def get_reader(request):
     return reader
 
 
-def parse_data(request, required_params=[]):
-    data = {}
+def parse_data(request, required_params):
+    data, reader = {}, None
     if request.method in ('PUT', 'POST'):
         reader = get_reader(request)
 
@@ -40,3 +43,23 @@ def parse_data(request, required_params=[]):
             raise RequestFatal(
                 400, 'required field: {}'.format(field))
     return data
+
+def notify(user):
+    query = urlencode({
+        'email': user.email,
+        'token': user.refresh_token,
+    })
+    url = '{base_path}:{port}{url}'.format(**ACTIVATION)
+    text = f'Subject: Hello in the Shop!\n\n' \
+           f'Please confirm your account by clicking this link: {url}?{query}'
+    data = {
+        'recipient': user.email,
+        'text': text,
+    }
+    print(text)
+
+    params = pika.ConnectionParameters(MQ["name"], MQ["port"], '/', pika.PlainCredentials('user', 'user'))
+    conn = pika.BlockingConnection(params)
+    chan = conn.channel()
+    chan.queue_declare(queue='main')
+    chan.basic_publish(exchange='', routing_key='main', body=json.dumps(data))
