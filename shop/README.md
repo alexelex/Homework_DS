@@ -7,7 +7,7 @@ to start the project run `docker-compose up`
 ### description
 API for online store using PostgreSQL, Django
 
-![GitHub Logo](/scheme.png)
+![data](/shop/scheme.png)
 
 ### API Documentation
 [Postman](https://documenter.getpostman.com/view/10647848/SzRxV9su?version=latest)
