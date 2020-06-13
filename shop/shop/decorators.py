@@ -21,8 +21,8 @@ def access_and_errors(func):
             logger.info("RequestWarning {}: {}".format(status, result))
         except Exception as e:
             status = 500
-            result = e.message
-            logger.error("unexpected Exception: {}".format(result))
+            result = "error"
+            logger.error("unexpected Exception: {}".format(e))
 
         response = {'response': result}
         return JsonResponse(response, status=status, safe=False)

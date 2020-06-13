@@ -82,7 +82,7 @@ def check_token_and_role(request):
     with grpc.insecure_channel(auth) as chan:
         stub = AuthStub(chan)
         token_msg = Token(token=token)
-        info = stub.Verify(token_msg)
+        info = stub.Verification(token_msg)
 
         if not info.verify_status:
             raise RequestFatal(401, "Invalid token")

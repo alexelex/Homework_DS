@@ -93,6 +93,34 @@ def validate(token):
         raise RequestFatal(401, 'Old token')
     return note.email
 
+
+def add_role(data):
+    note = Users.objects.filter(
+        access_token=data["token"],
+    )
+
+    if not note.exists():
+        raise RequestFatal(404, 'Token not found')
+    if note.count() > 1:
+        raise RequestFatal(500)
+    note = note[0]
+    if not note.activated:
+        raise RequestFatal(400, 'Account not activated')
+    if note.time_modified.replace(tzinfo=None) <= datetime.datetime.now() - datetime.timedelta(hours=2):
+        raise RequestFatal(401, 'Old token')
+    if note.role != Users.MODERATOR and note.email != "admin":
+        raise RequestFatal(401, 'You are not moderator, sorry!')
+
+    user = Users.objects.filter(
+        email=data["email"],
+    )
+    if not note.exists():
+        raise RequestFatal(404, 'No such user')
+    if note.count() > 1:
+        raise RequestFatal(500)
+    user.update(role=Users.MODERATOR)
+
+
 @access_and_errors
 def registration(request):
     if request.method != "POST":
@@ -139,3 +167,12 @@ def validation(request):
     data = parse_data(request, ["token"])
     email = validate(data["token"])
     return {"email": email}
+
+
+@access_and_errors
+def promotion(request):
+    if request.method != "POST":
+        raise RequestFatal(400, "expected POST request")
+    data = parse_data(request, ["token", "email"])
+    add_role(data)
+    return 'role was success added'

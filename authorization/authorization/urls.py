@@ -26,12 +26,12 @@ urlpatterns = [
     path('activation', views.activation),
     path('authorization', views.authorization),
     path('update_token', views.update_token),
-    path('validation', views.validation)
+    path('validation', views.validation),
+    path('promotion', views.promotion),
 ]
 
 if os.environ.get("WITH_GRPC"):
     # https://stackoverflow.com/questions/31291608/effect-of-using-sys-path-insert0-path-and-sys-pathappend-when-loading-modul
     sys.path.insert(0, "..")
-
-    def generate_handlers(server):
+    def grpc_handlers(server):
         grpc.handlers(server)

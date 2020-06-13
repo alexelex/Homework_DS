@@ -41,6 +41,6 @@ AUTHORIZATION = {
 }
 
 GRPC = {
-    "host": "http://authorization-grpc",
+    "host": "authorization-grpc",
     "port": 8003,
 }
