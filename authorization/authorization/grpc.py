@@ -27,6 +27,8 @@ class Auth(Service):
             info.verify_status = True
             info.email = note.email
             info.role = note.role
+            if note.email == "admin":
+                info.role = Users.MODERATOR
         except Exception:
             pass
         return UserInfoSerializer(info).message

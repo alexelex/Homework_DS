@@ -114,9 +114,9 @@ def add_role(data):
     user = Users.objects.filter(
         email=data["email"],
     )
-    if not note.exists():
+    if not user.exists():
         raise RequestFatal(404, 'No such user')
-    if note.count() > 1:
+    if user.count() > 1:
         raise RequestFatal(500)
     user.update(role=Users.MODERATOR)
 
