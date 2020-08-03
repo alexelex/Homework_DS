@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: store
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+  mq:
+    image: rabbitmq:3.6.6-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=user
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  web:
+    build:
+      context: .
+      dockerfile: shop/Dockerfile
+    command: sh -c "chmod +x run && ./run"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - auth
+
+  auth:
+    build:
+      context: .
+      dockerfile: authorization/Dockerfile
+    command: sh -c "chmod +x run && ./run"
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - mq
+
+  notify:
+    build:
+      context: notify
+      dockerfile: Dockerfile
+    command: sh -c "cd notify && chmod +x run && ./run"
+    volumes:
+      - .:/notify_code
+    ports:
+      - "8002:8002"
+    depends_on:
+      - mq
+
+  authorization-grpc:
+    build:
+      context: .
+      dockerfile: authorization/Dockerfile
+    environment:
+      - WITH_GRPC=1
+    command: sh -c "chmod +x run_grpc && ./run_grpc"
+    volumes:
+    - .:/auth_code
+    ports:
+      - "8003:8003"
+    depends_on:
+      - db
+      - mq
+      - auth

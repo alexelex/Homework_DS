@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "Wait for database start"
+chmod +x wait_for_it.sh
+./wait_for_it.sh db:5432
+./wait_for_it.sh db:5672
+echo "Apply database migrations"
+python manage.py makemigrations
+python manage.py migrate
+echo "Starting server"
+python manage.py runserver 0.0.0.0:8001

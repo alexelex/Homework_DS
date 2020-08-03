@@ -1,0 +1,8 @@
+# pip install -r requirements.txt
+django~=2.2.10
+psycopg2
+requests
+grpcio-tools
+grpcio
+djangogrpcframework
+djangorestframework
